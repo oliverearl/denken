@@ -2,29 +2,55 @@
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
+import SearchBar from '@/components/SearchBar.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, Home, Search, Bell, Mail, User, Hash, Bookmark, Settings } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Home',
         href: '/dashboard',
-        icon: LayoutGrid,
+        icon: Home,
+    },
+    {
+        title: 'Explore',
+        href: '/explore',
+        icon: Hash,
+    },
+    {
+        title: 'Notifications',
+        href: '/notifications',
+        icon: Bell,
+    },
+    {
+        title: 'Messages',
+        href: '/messages',
+        icon: Mail,
+    },
+    {
+        title: 'Bookmarks',
+        href: '/bookmarks',
+        icon: Bookmark,
+    },
+    {
+        title: 'Profile',
+        href: '/profile',
+        icon: User,
     },
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
+        title: 'Settings',
+        href: '/settings',
+        icon: Settings,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
+        title: 'Help Center',
+        href: '/help',
         icon: BookOpen,
     },
 ];
@@ -40,6 +66,9 @@ const footerNavItems: NavItem[] = [
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem class="px-4 py-2">
+                    <SearchBar />
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarHeader>
