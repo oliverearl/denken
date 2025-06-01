@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import PostComment from '@/components/PostComment.vue';
 
 interface User {
   name: string;
@@ -12,6 +13,19 @@ interface NewsArticle {
   source: string;
   url: string;
   image: string;
+}
+
+interface CommentUser {
+  name: string;
+  avatar: string;
+}
+
+interface Comment {
+  id: number;
+  user: CommentUser;
+  content: string;
+  timestamp: string;
+  likes: number;
 }
 
 interface PostProps {
@@ -28,6 +42,30 @@ interface PostProps {
 defineProps<{ post: PostProps }>();
 
 const showComments = ref(false);
+
+// Sample comments data
+const sampleComments = ref<Comment[]>([
+  {
+    id: 1,
+    user: {
+      name: 'Sarah Johnson',
+      avatar: 'https://randomuser.me/api/portraits/women/5.jpg'
+    },
+    content: 'I completely agree with your thoughts on this article!',
+    timestamp: '1h ago',
+    likes: 5
+  },
+  {
+    id: 2,
+    user: {
+      name: 'Michael Brown',
+      avatar: 'https://randomuser.me/api/portraits/men/7.jpg'
+    },
+    content: 'Interesting perspective. I think there\'s more to consider though.',
+    timestamp: '45m ago',
+    likes: 2
+  }
+]);
 </script>
 
 <template>
@@ -90,28 +128,13 @@ const showComments = ref(false);
         </div>
       </div>
 
-      <!-- Sample Comments -->
+      <!-- Comments List -->
       <div class="space-y-3">
-        <div class="flex">
-          <img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Commenter" class="mr-3 h-8 w-8 rounded-full" />
-          <div class="flex-1">
-            <div class="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <div class="font-bold text-gray-900 dark:text-white">Sarah Johnson</div>
-              <div class="text-gray-800 dark:text-gray-200">I completely agree with your thoughts on this article!</div>
-            </div>
-            <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">1h ago · Reply · Like</div>
-          </div>
-        </div>
-        <div class="flex">
-          <img src="https://randomuser.me/api/portraits/men/7.jpg" alt="Commenter" class="mr-3 h-8 w-8 rounded-full" />
-          <div class="flex-1">
-            <div class="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <div class="font-bold text-gray-900 dark:text-white">Michael Brown</div>
-              <div class="text-gray-800 dark:text-gray-200">Interesting perspective. I think there's more to consider though.</div>
-            </div>
-            <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">45m ago · Reply · Like</div>
-          </div>
-        </div>
+        <PostComment
+          v-for="comment in sampleComments"
+          :key="comment.id"
+          :comment="comment"
+        />
       </div>
     </div>
   </div>
