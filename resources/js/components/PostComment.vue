@@ -1,20 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import type { Comment } from '@/types/comment';
 
-interface User {
-  name: string;
-  avatar: string;
-}
-
-interface CommentProps {
-  id: number;
-  user: User;
-  content: string;
-  timestamp: string;
-  likes: number;
-}
-
-const props = defineProps<{ comment: CommentProps }>();
+const props = defineProps<{ comment: Comment }>();
 const likeCount = ref(props.comment.likes || 0);
 
 // Toggle like function

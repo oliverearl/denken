@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Post from '@/components/Post.vue';
+import type { Post as PostType } from '@/types/post';
 
 // Mock data for demonstration
-const posts = ref([
+const posts = ref<PostType[]>([
   {
     id: 1,
     user: {

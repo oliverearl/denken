@@ -4,45 +4,10 @@ import PostComment from '@/components/PostComment.vue';
 import CommentIcon from '@/components/ui/icon/CommentIcon.vue';
 import ShareIcon from '@/components/ui/icon/ShareIcon.vue';
 import HeartIcon from '@/components/ui/icon/HeartIcon.vue';
+import type { Post } from '@/types/post';
+import type { Comment } from '@/types/comment';
 
-interface User {
-  name: string;
-  handle: string;
-  avatar: string;
-}
-
-interface NewsArticle {
-  title: string;
-  source: string;
-  url: string;
-  image: string;
-}
-
-interface CommentUser {
-  name: string;
-  avatar: string;
-}
-
-interface Comment {
-  id: number;
-  user: CommentUser;
-  content: string;
-  timestamp: string;
-  likes: number;
-}
-
-interface PostProps {
-  id: number;
-  user: User;
-  content: string;
-  newsArticle: NewsArticle;
-  timestamp: string;
-  likes: number;
-  comments: number;
-  shares: number;
-}
-
-defineProps<{ post: PostProps }>();
+defineProps<{ post: Post }>();
 
 const showComments = ref(false);
 
