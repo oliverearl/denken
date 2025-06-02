@@ -18,13 +18,13 @@ final class NewsSourceSocialMediaFactory extends Factory
     {
         return [
             'news_source_id' => fn(): Factory => NewsSource::factory(),
-            'facebook' => $this->faker->userName(),
-            'x' => $this->faker->userName(),
-            'instagram' => $this->faker->userName(),
-            'tiktok' => $this->faker->userName(),
-            'threads' => $this->faker->userName(),
-            'bsky' => $this->faker->userName(),
-            'linkedin' => $this->faker->userName(),
+            'facebook' => fake()->userName(),
+            'x' => fake()->userName(),
+            'instagram' => fake()->userName(),
+            'tiktok' => fake()->userName(),
+            'threads' => fake()->userName(),
+            'bsky' => fake()->userName(),
+            'linkedin' => fake()->userName(),
         ];
     }
 }

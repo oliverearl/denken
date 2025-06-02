@@ -18,15 +18,15 @@ final class NewsSourceFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => fake()->unique()->company(),
             'slug' => fn(array $a) => Str::slug($a['name']),
-            'bias' => $this->faker->randomElement(Bias::cases()),
-            'homepage' => $this->faker->url(),
-            'domain' => $this->faker->domainName(),
-            'country' => $this->faker->country(),
-            'language' => $this->faker->languageCode(),
-            'is_verified' => $this->faker->boolean(),
-            'last_reviewed_at' => $this->faker->dateTimeThisYear(),
+            'bias' => fake()->randomElement(Bias::cases()),
+            'homepage' => fake()->url(),
+            'domain' => fake()->domainName(),
+            'country' => fake()->country(),
+            'language' => fake()->languageCode(),
+            'is_verified' => fake()->boolean(),
+            'last_reviewed_at' => fake()->dateTimeThisYear(),
         ];
     }
 }
