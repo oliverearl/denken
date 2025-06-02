@@ -8,7 +8,7 @@ import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 
 // Extend ImportMeta interface for Vite...
-// @ts-ignore This is necessary to avoid TypeScript errors when accessing Vite environment variables.
+// @ts-expect-error This is necessary to avoid TypeScript errors when accessing Vite environment variables.
 declare module 'vite/client' {
     interface ImportMetaEnv {
         readonly VITE_APP_NAME: string;
