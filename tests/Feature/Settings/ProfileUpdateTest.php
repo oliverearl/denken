@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(LazilyRefreshDatabase::class);
 
 test('profile page is displayed', function () {
     $user = User::factory()->create();
