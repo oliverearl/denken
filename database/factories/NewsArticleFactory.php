@@ -8,7 +8,7 @@ use App\Models\NewsSource;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
-class NewsArticleFactory extends Factory
+final class NewsArticleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,16 +19,16 @@ class NewsArticleFactory extends Factory
     {
         return [
             'news_source_id' => fn(): Factory => NewsSource::factory(),
-            'url' => $this->faker->url(),
-            'canonical_url' => $this->faker->url(),
-            'title' => $this->faker->sentence(),
-            'summary' => $this->faker->text(),
-            'excerpt' => $this->faker->text(),
+            'url' => fake()->url(),
+            'canonical_url' => fake()->url(),
+            'title' => fake()->sentence(),
+            'summary' => fake()->text(),
+            'excerpt' => fake()->text(),
             'content_hash' => fn(array $a): string => Hash::make($a['summary']),
-            'published_at' => $this->faker->dateTimeThisMonth(),
-            'image_url' => $this->faker->imageUrl(),
-            'keywords' => $this->faker->words(),
-            'tags' => $this->faker->words(),
+            'published_at' => fake()->dateTimeThisMonth(),
+            'image_url' => fake()->imageUrl(),
+            'keywords' => fake()->words(),
+            'tags' => fake()->words(),
             'meta' => [],
         ];
     }
