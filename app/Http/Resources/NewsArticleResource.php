@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin \App\Models\NewsArticle */
-class NewsArticleResource extends JsonResource
+final class NewsArticleResource extends JsonResource
 {
     /** @inheritDoc */
     public function toArray(Request $request): array
