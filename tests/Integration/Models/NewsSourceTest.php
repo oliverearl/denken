@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\Bias;
+use App\Models\NewsArticle;
 use App\Models\NewsSource;
 use App\Models\NewsSourceSocialMedia;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
@@ -17,6 +18,16 @@ describe('relationships', function (): void {
         expect($newsSource->socialMedia)
             ->toBeInstanceOf(NewsSourceSocialMedia::class)
             ->and($newsSource->socialMedia->id)->toEqual($socialMedia->id);
+    });
+
+    it('can have multiple news articles', function (): void {
+        $count = 3;
+        $newsSource = NewsSource::factory()->create();
+        NewsArticle::factory()->count($count)->for($newsSource)->create();
+
+        expect($newsSource->newsArticles)
+            ->and($newsSource->newsArticles->count())->toEqual($count)
+            ->and($newsSource->newsArticles->first())->toBeInstanceOf(NewsArticle::class);
     });
 });
 
