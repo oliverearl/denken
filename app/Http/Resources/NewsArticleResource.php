@@ -22,8 +22,8 @@ final class NewsArticleResource extends JsonResource
             'summary' => $this->summary,
             'published_at' => $this->published_at->toIso8601String(),
             'image_url' => $this->image_url,
-            'keywords' => $this->keywords ?? [],
-            'tags' => $this->tags ?? [],
+            'keywords' => KeywordResource::collection($this->keywords),
+            'tags' => TagResource::collection($this->tags),
         ];
     }
 }
