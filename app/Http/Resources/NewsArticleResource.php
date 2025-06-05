@@ -15,7 +15,7 @@ final class NewsArticleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'news_source' => new NewsSourceResource($this->whenLoaded('newsSource')),
+            'news_source' => $this->whenLoaded('newsSource', NewsSourceResource::make($this->newsSource)),
             'url' => $this->url,
             'canonical_url' => $this->canonical_url,
             'title' => $this->title,
