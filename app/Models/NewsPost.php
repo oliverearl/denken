@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class NewsArticle extends Model
+class NewsPost extends Model
 {
     use HasFactory;
+    use HasUuids;
     use SoftDeletes;
 
     /**
@@ -21,18 +22,13 @@ class NewsArticle extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'news_source_id',
-        'url',
-        'canonical_url',
-        'title',
-        'summary',
-        'excerpt',
-        'content_hash',
-        'published_at',
-        'image_url',
-        'keywords',
-        'tags',
-        'meta',
+        'content',
+        'user_id',
+        'news_article_id',
+        'is_limited',
+        'is_hidden',
+        'is_pinned',
+        'geolocation',
     ];
 
     /**
@@ -41,44 +37,43 @@ class NewsArticle extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'content_hash',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'is_limited',
         'meta',
+        'deleted_at',
     ];
 
     /**
-     * A news article belongs to a news source.
+     * A news post belongs to a user.
      */
-    public function newsSource(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(NewsSource::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
-     * A news article has one or many news posts.
+     * A news post belongs to a news article.
      */
-    public function newsPosts(): HasMany
+    public function newsArticle(): BelongsTo
     {
-        return $this->hasMany(NewsPost::class);
+        return $this->belongsTo(NewsArticle::class);
     }
 
     /**
      * Get the attributes that should be cast.
      *
-     * @return array<string, mixed>
+     * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
-            'published_at' => 'immutable_datetime',
+            'id' => 'string',
+            'is_limited' => 'boolean',
+            'is_hidden' => 'boolean',
+            'is_pinned' => 'boolean',
+            'meta' => 'array',
             'created_at' => 'immutable_datetime',
             'updated_at' => 'immutable_datetime',
             'deleted_at' => 'immutable_datetime',
-            'keywords' => 'array',
-            'tags' => 'array',
-            'meta' => 'array',
         ];
     }
 }

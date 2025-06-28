@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\NewsArticle;
+use App\Models\NewsPost;
 use App\Models\NewsSource;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
@@ -16,6 +17,18 @@ describe('relationships', function (): void {
         expect($newsSource)
             ->toBeInstanceOf(NewsSource::class)
             ->and($newsSource->id)->toEqual($newsArticle->news_source_id);
+    });
+
+    it('has many posts', function (): void {
+        $newsArticle = NewsArticle::factory()->create();
+        NewsPost::factory()->count(3)->for($newsArticle)->create();
+        $posts = $newsArticle->newsPosts;
+
+        expect($posts)
+            ->not()->toBeEmpty()
+            ->and($posts->first())
+                ->toBeInstanceOf(NewsPost::class)
+                ->news_article_id->toEqual($newsArticle->id);
     });
 });
 
