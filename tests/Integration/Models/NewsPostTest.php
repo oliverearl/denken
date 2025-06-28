@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Like;
 use App\Models\NewsArticle;
 use App\Models\NewsPost;
 use App\Models\User;
@@ -26,6 +27,18 @@ describe('relationships', function (): void {
         expect($newsArticle)
             ->toBeInstanceOf(NewsArticle::class)
             ->and($newsArticle->id)->toEqual($newsPost->news_article_id);
+    });
+
+    it('can retrieve its likes', function (): void {
+        $newsPost = NewsPost::factory()->create();
+        Like::factory()->count(3)->for($newsPost)->create();
+        $likes = $newsPost->likes;
+
+        expect($likes)
+            ->toBeCollection()
+            ->and($likes->first())
+                ->toBeInstanceOf(Like::class)
+                ->and($likes->first()->news_post_id)->toEqual($newsPost->id);
     });
 });
 

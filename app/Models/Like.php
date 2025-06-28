@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class NewsPost extends Model
+class Like extends Model
 {
     use HasFactory;
-    use HasUuids;
     use SoftDeletes;
 
     /**
@@ -23,13 +20,8 @@ class NewsPost extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'content',
         'user_id',
-        'news_article_id',
-        'is_limited',
-        'is_hidden',
-        'is_pinned',
-        'geolocation',
+        'news_post_id',
     ];
 
     /**
@@ -38,13 +30,13 @@ class NewsPost extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'is_limited',
-        'meta',
+        'created_at',
+        'updated_at',
         'deleted_at',
     ];
 
     /**
-     * A news post belongs to a user.
+     * A like belongs to a user.
      */
     public function user(): BelongsTo
     {
@@ -52,34 +44,21 @@ class NewsPost extends Model
     }
 
     /**
-     * A news post belongs to a news article.
+     * A like belongs to a news post.
      */
-    public function newsArticle(): BelongsTo
+    public function newsPost(): BelongsTo
     {
-        return $this->belongsTo(NewsArticle::class);
-    }
-
-    /**
-     * A news post has one or many likes.
-     */
-    public function likes(): HasMany
-    {
-        return $this->hasMany(Like::class);
+        return $this->belongsTo(NewsPost::class);
     }
 
     /**
      * Get the attributes that should be cast.
      *
-     * @return array<string, string>
+     * @return array<string, mixed>
      */
     protected function casts(): array
     {
         return [
-            'id' => 'string',
-            'is_limited' => 'boolean',
-            'is_hidden' => 'boolean',
-            'is_pinned' => 'boolean',
-            'meta' => 'array',
             'created_at' => 'immutable_datetime',
             'updated_at' => 'immutable_datetime',
             'deleted_at' => 'immutable_datetime',
