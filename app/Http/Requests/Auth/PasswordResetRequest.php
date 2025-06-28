@@ -28,7 +28,7 @@ final class PasswordResetRequest extends FormRequest
         return [
             'current_password' => [
                 'required',
-                'current_password'
+                'current_password',
             ],
             'password' => [
                 'required',
