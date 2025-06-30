@@ -62,6 +62,14 @@ class User extends Authenticatable
     }
 
     /**
+     * A user has one or many comment likes.
+     */
+    public function commentLikes(): HasMany
+    {
+        return $this->hasMany(CommentLike::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

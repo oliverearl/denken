@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Comment;
+use App\Models\CommentLike;
 use App\Models\NewsPost;
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
@@ -26,6 +27,16 @@ describe('relationships', function (): void {
         expect($newsPost)
             ->toBeInstanceOf(NewsPost::class)
             ->and($newsPost->id)->toEqual($comment->news_post_id);
+    });
+
+    it('has many likes', function (): void {
+        $comment = Comment::factory()->create();
+        CommentLike::factory()->count(3)->for($comment)->create();
+        $likes = $comment->likes;
+
+        expect($likes)
+            ->not->toBeEmpty()
+            ->and($likes[0])->toBeInstanceOf(CommentLike::class);
     });
 });
 
