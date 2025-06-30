@@ -46,6 +46,14 @@ class User extends Authenticatable
     }
 
     /**
+     * A user has one or many comments.
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
