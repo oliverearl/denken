@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin \App\Models\Comment */
-class CommentResource extends JsonResource
+final class CommentResource extends JsonResource
 {
     /** @inheritDoc */
     public function toArray(Request $request): array
