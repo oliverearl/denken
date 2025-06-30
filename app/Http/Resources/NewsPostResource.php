@@ -22,6 +22,7 @@ final class NewsPostResource extends JsonResource
             'geolocation' => $this->geolocation,
             'created_at' => $this->created_at->toIso8601String(),
             'updated_at' => $this->updated_at->toIso8601String(),
+            'user' => $this->whenLoaded('user', OtherUserResource::make($this->user)),
             'news_article' => $this->whenLoaded('newsArticle', NewsArticleResource::make($this->newsArticle)),
         ];
     }
