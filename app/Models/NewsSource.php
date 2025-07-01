@@ -17,6 +17,25 @@ class NewsSource extends Model
     use SoftDeletes;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'bias',
+        'domain',
+        'country',
+        'language',
+        'homepage',
+        'is_active',
+        'is_verified',
+        'is_banned',
+        'last_reviewed_at',
+    ];
+
+    /**
      * The attributes that should be hidden.
      *
      * @var array<int, string>
