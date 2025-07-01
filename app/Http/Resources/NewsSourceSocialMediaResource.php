@@ -21,6 +21,7 @@ final class NewsSourceSocialMediaResource extends JsonResource
             'threads' => $this->threads,
             'bsky' => $this->bsky,
             'linkedin' => $this->linkedin,
+            'youtube' => $this->youtube,
         ];
     }
 }

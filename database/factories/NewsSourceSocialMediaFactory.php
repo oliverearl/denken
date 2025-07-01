@@ -25,6 +25,7 @@ final class NewsSourceSocialMediaFactory extends Factory
             'threads' => fake()->userName(),
             'bsky' => fake()->userName(),
             'linkedin' => fake()->userName(),
+            'youtube' => fake()->userName(),
         ];
     }
 }

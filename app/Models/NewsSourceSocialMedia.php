@@ -26,6 +26,7 @@ class NewsSourceSocialMedia extends Model
         'threads',
         'bsky',
         'linkedin',
+        'youtube',
     ];
 
     /**
