@@ -13,6 +13,22 @@ class NewsSourceSocialMedia extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'news_source_id',
+        'facebook',
+        'x',
+        'instagram',
+        'tiktok',
+        'threads',
+        'bsky',
+        'linkedin',
+    ];
+
+    /**
      * The attributes that should be hidden.
      *
      * @var array<int, string>
